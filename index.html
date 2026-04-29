@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Own The Way Race 2026</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:#f4f6fb;
+color:#111;
+}
+
+/* PAGE SYSTEM */
+
+.page{display:none}
+.page.active{display:block}
+
+/* BANNER */
+
+.banner img{
+width:100%;
+display:block;
+}
+
+/* HEADER */
+
+.header{
+background:#1565d8;
+color:#fff;
+padding:22px;
+text-align:center;
+}
+
+.header h1{
+font-size:22px;
+}
+
+.header p{
+font-size:13px;
+opacity:0.9;
+}
+
+/* CONTAINER */
+
+.container{
+max-width:650px;
+margin:auto;
+padding:20px;
+}
+
+/* COUNTDOWN */
+
+.countdown{
+background:#fff;
+padding:15px;
+border-radius:12px;
+text-align:center;
+margin-bottom:15px;
+box-shadow:0 5px 15px rgba(0,0,0,0.08);
+}
+
+/* PROGRESS BAR */
+
+.progressBox{
+background:#fff;
+padding:15px;
+border-radius:12px;
+margin-bottom:15px;
+box-shadow:0 5px 15px rgba(0,0,0,0.08);
+}
+
+.progress{
+height:10px;
+background:#eee;
+border-radius:20px;
+overflow:hidden;
+margin-top:8px;
+}
+
+.progressFill{
+height:100%;
+width:45%;
+background:#1565d8;
+}
+
+/* CARD */
+
+.card{
+background:#fff;
+border-radius:14px;
+padding:18px;
+margin-bottom:15px;
+box-shadow:0 5px 15px rgba(0,0,0,0.08);
+}
+
+.info{
+font-size:14px;
+color:#666;
+}
+
+.line{
+border-top:1px dashed #ddd;
+margin:15px 0;
+}
+
+.price-row{
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.price{
+font-size:20px;
+font-weight:700;
+color:#1565d8;
+}
+
+/* COUNTER */
+
+.counter{
+display:flex;
+gap:10px;
+align-items:center;
+}
+
+.btn{
+background:#1565d8;
+color:#fff;
+padding:7px 14px;
+border-radius:8px;
+cursor:pointer;
+}
+
+/* BUTTON */
+
+.btn-full{
+width:100%;
+margin-top:15px;
+padding:14px;
+background:#1565d8;
+color:#fff;
+border-radius:10px;
+text-align:center;
+cursor:pointer;
+font-weight:600;
+}
+
+/* SUBTOTAL */
+
+.subtotal{
+margin-top:12px;
+font-weight:600;
+}
+
+/* FORM */
+
+.form-input{
+width:100%;
+padding:12px;
+margin-top:10px;
+border-radius:8px;
+border:1px solid #ddd;
+}
+
+/* BOX */
+
+.box{
+background:#fff;
+padding:18px;
+border-radius:14px;
+box-shadow:0 5px 15px rgba(0,0,0,0.08);
+}
+
+/* QRIS */
+
+.qris{
+width:100%;
+max-width:260px;
+display:block;
+margin:auto;
+margin-top:10px;
+}
+
+/* FOOTER */
+
+footer{
+text-align:center;
+padding:25px;
+font-size:12px;
+color:#777;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="banner">
+<img src="banner.jpg">
+</div>
+
+<div class="header">
+<h1>Neverland Project ID</h1>
+<p>Lapangan Rampal • Malang</p>
+</div>
+
+<!-- PAGE 1 -->
+
+<div class="page active" id="page1">
+
+<div class="container">
+
+<div class="countdown">
+<h3>Event Countdown</h3>
+<p id="countdown"></p>
+</div>
+
+<div class="progressBox">
+Tiket Terjual
+<div class="progress">
+<div class="progressFill"></div>
+</div>
+<small>45% tiket sudah terjual</small>
+</div>
+
+<h2>Kategori Tiket</h2>
+
+<div class="card">
+
+<h3>Presale Festival</h3>
+<div class="info">02 Mei 2026</div>
+
+<div class="line"></div>
+
+<div class="price-row">
+
+<div class="price">Rp 175.000</div>
+
+<div class="counter">
+<div class="btn" onclick="changeQty('festival',-1)">-</div>
+<span id="qty-festival">0</span>
+<div class="btn" onclick="changeQty('festival',1)">+</div>
+</div>
+
+</div>
+</div>
+
+<div class="card">
+
+<h3>VIP Race</h3>
+<div class="info">02 Mei 2026</div>
+
+<div class="line"></div>
+
+<div class="price-row">
+
+<div class="price">Rp 300.000</div>
+
+<div class="counter">
+<div class="btn" onclick="changeQty('vip',-1)">-</div>
+<span id="qty-vip">0</span>
+<div class="btn" onclick="changeQty('vip',1)">+</div>
+</div>
+
+</div>
+</div>
+
+<div class="subtotal" id="subtotal">
+Subtotal (0 tiket) - Rp 0
+</div>
+
+<div class="btn-full" onclick="nextPage()">
+Lanjut Isi Data
+</div>
+
+</div>
+</div>
+
+<!-- PAGE 2 -->
+
+<div class="page" id="page2">
+
+<div class="container">
+
+<h2>Form Pembelian</h2>
+
+<div class="box">
+
+<p id="orderSummary"></p>
+
+<div class="line"></div>
+
+<input class="form-input" id="nama" placeholder="Nama Lengkap">
+
+<input class="form-input" id="wa" placeholder="Nomor WhatsApp">
+
+<input class="form-input" id="email" placeholder="Email">
+
+<textarea class="form-input" id="catatan" placeholder="Catatan tambahan"></textarea>
+
+<div class="btn-full" onclick="showInvoice()">
+Lanjut Pembayaran
+</div>
+
+</div>
+</div>
+</div>
+
+<!-- PAGE 3 -->
+
+<div class="page" id="page3">
+
+<div class="container">
+
+<h2>Invoice Pembayaran</h2>
+
+<div class="box">
+
+<p id="invoice"></p>
+
+<div class="line"></div>
+
+<p id="invNama"></p>
+<p id="invWA"></p>
+<p id="invTicket"></p>
+<p id="invTotal"></p>
+
+<div class="line"></div>
+
+<h3 style="text-align:center">Scan QRIS</h3>
+
+<img src="qris.png" class="qris">
+
+<p style="text-align:center;font-size:13px;color:#666;margin-top:10px">
+Silakan scan QRIS untuk melakukan pembayaran
+</p>
+
+<div class="btn-full" onclick="confirmWA()">
+Saya Sudah Bayar
+</div>
+
+</div>
+
+</div>
+</div>
+
+<footer>
+© 2026 Own The Way Race
+</footer>
+
+<script>
+
+/* PRICE */
+
+let prices={
+festival:175000,
+vip:300000
+};
+
+let qty={
+festival:0,
+vip:0
+};
+
+/* FORMAT */
+
+function rupiah(x){
+return "Rp "+x.toString().replace(/\B(?=(\d{3})+(?!\d))/g,".");
+}
+
+/* COUNTER */
+
+function changeQty(type,c){
+
+qty[type]+=c;
+if(qty[type]<0) qty[type]=0;
+
+document.getElementById("qty-"+type).innerText=qty[type];
+
+updateTotal();
+
+}
+
+/* TOTAL */
+
+function updateTotal(){
+
+let total=0;
+let count=0;
+
+for(let k in qty){
+
+total+=qty[k]*prices[k];
+count+=qty[k];
+
+}
+
+document.getElementById("subtotal").innerText=
+`Subtotal (${count} tiket) - ${rupiah(total)}`;
+
+}
+
+/* PAGE */
+
+function nextPage(){
+
+let total=0;
+let count=0;
+
+for(let k in qty){
+
+total+=qty[k]*prices[k];
+count+=qty[k];
+
+}
+
+if(count==0){
+alert("Pilih tiket dulu");
+return;
+}
+
+document.getElementById("page1").classList.remove("active");
+document.getElementById("page2").classList.add("active");
+
+document.getElementById("orderSummary").innerText=
+`Jumlah tiket: ${count}
+Total: ${rupiah(total)}`;
+
+}
+
+/* INVOICE */
+
+function showInvoice(){
+
+let nama=document.getElementById("nama").value;
+let wa=document.getElementById("wa").value;
+
+if(nama=="" || wa==""){
+alert("Nama dan WA wajib diisi");
+return;
+}
+
+let total=0;
+let count=0;
+
+for(let k in qty){
+
+total+=qty[k]*prices[k];
+count+=qty[k];
+
+}
+
+let inv="INV-"+Math.floor(Math.random()*90000+10000);
+
+document.getElementById("invoice").innerText="Invoice : "+inv;
+document.getElementById("invNama").innerText="Nama : "+nama;
+document.getElementById("invWA").innerText="WA : "+wa;
+document.getElementById("invTicket").innerText="Jumlah tiket : "+count;
+document.getElementById("invTotal").innerText="Total bayar : "+rupiah(total);
+
+document.getElementById("page2").classList.remove("active");
+document.getElementById("page3").classList.add("active");
+
+}
+
+/* WHATSAPP */
+
+function confirmWA(){
+
+let pesan="Saya sudah melakukan pembayaran tiket Own The Way Race";
+
+window.open("https://wa.me/6281234567890?text="+encodeURIComponent(pesan));
+
+}
+
+/* COUNTDOWN */
+
+let eventDate=new Date("May 2, 2026 00:00:00").getTime();
+
+setInterval(function(){
+
+let now=new Date().getTime();
+let gap=eventDate-now;
+
+let d=Math.floor(gap/(1000*60*60*24));
+let h=Math.floor((gap%(1000*60*60*24))/(1000*60*60));
+let m=Math.floor((gap%(1000*60*60))/(1000*60));
+
+document.getElementById("countdown").innerText=
+d+" hari "+h+" jam "+m+" menit";
+
+},1000);
+
+</script>
+
+</body>
+</html>
