@@ -22,19 +22,13 @@ background:#f4f6fb;
 color:#111;
 }
 
-/* PAGE SYSTEM */
-
 .page{display:none}
 .page.active{display:block}
-
-/* BANNER */
 
 .banner img{
 width:100%;
 display:block;
 }
-
-/* HEADER */
 
 .header{
 background:#1565d8;
@@ -52,15 +46,11 @@ font-size:13px;
 opacity:0.9;
 }
 
-/* CONTAINER */
-
 .container{
 max-width:650px;
 margin:auto;
 padding:20px;
 }
-
-/* COUNTDOWN */
 
 .countdown{
 background:#fff;
@@ -70,8 +60,6 @@ text-align:center;
 margin-bottom:15px;
 box-shadow:0 5px 15px rgba(0,0,0,0.08);
 }
-
-/* PROGRESS BAR */
 
 .progressBox{
 background:#fff;
@@ -94,8 +82,6 @@ height:100%;
 width:45%;
 background:#1565d8;
 }
-
-/* CARD */
 
 .card{
 background:#fff;
@@ -127,8 +113,6 @@ font-weight:700;
 color:#1565d8;
 }
 
-/* COUNTER */
-
 .counter{
 display:flex;
 gap:10px;
@@ -143,8 +127,6 @@ border-radius:8px;
 cursor:pointer;
 }
 
-/* BUTTON */
-
 .btn-full{
 width:100%;
 margin-top:15px;
@@ -157,14 +139,10 @@ cursor:pointer;
 font-weight:600;
 }
 
-/* SUBTOTAL */
-
 .subtotal{
 margin-top:12px;
 font-weight:600;
 }
-
-/* FORM */
 
 .form-input{
 width:100%;
@@ -174,16 +152,12 @@ border-radius:8px;
 border:1px solid #ddd;
 }
 
-/* BOX */
-
 .box{
 background:#fff;
 padding:18px;
 border-radius:14px;
 box-shadow:0 5px 15px rgba(0,0,0,0.08);
 }
-
-/* QRIS */
 
 .qris{
 width:100%;
@@ -192,8 +166,6 @@ display:block;
 margin:auto;
 margin-top:10px;
 }
-
-/* FOOTER */
 
 footer{
 text-align:center;
@@ -223,7 +195,7 @@ color:#777;
 <div class="container">
 
 <div class="countdown">
-<h3>Tambahan Tiket</h3>
+<h3>Waktu Tiket Tambahan</h3>
 <p id="countdown"></p>
 </div>
 
@@ -239,7 +211,7 @@ Tiket Terjual
 
 <div class="card">
 
-<h3>Presale Festival</h3>
+<h3>Pre-sale 2 Festival</h3>
 <div class="info">02 Mei 2026</div>
 
 <div class="line"></div>
@@ -259,7 +231,7 @@ Tiket Terjual
 
 <div class="card">
 
-<h3>VIP Race</h3>
+<h3>Normal VIP</h3>
 <div class="info">02 Mei 2026</div>
 
 <div class="line"></div>
@@ -303,12 +275,10 @@ Lanjut Isi Data
 <div class="line"></div>
 
 <input class="form-input" id="nama" placeholder="Nama Lengkap">
-
 <input class="form-input" id="wa" placeholder="Nomor WhatsApp">
-
 <input class="form-input" id="email" placeholder="Email">
 
-<textarea class="form-input" id="Jumlah Ticket" placeholder="Jumlah Ticket"></textarea>
+<textarea class="form-input" placeholder="Jumlah Ticket"></textarea>
 
 <div class="btn-full" onclick="showInvoice()">
 Lanjut Pembayaran
@@ -362,8 +332,6 @@ Saya Sudah Bayar
 
 <script>
 
-/* PRICE */
-
 let prices={
 festival:175000,
 vip:300000
@@ -374,13 +342,9 @@ festival:0,
 vip:0
 };
 
-/* FORMAT */
-
 function rupiah(x){
 return "Rp "+x.toString().replace(/\B(?=(\d{3})+(?!\d))/g,".");
 }
-
-/* COUNTER */
 
 function changeQty(type,c){
 
@@ -392,8 +356,6 @@ document.getElementById("qty-"+type).innerText=qty[type];
 updateTotal();
 
 }
-
-/* TOTAL */
 
 function updateTotal(){
 
@@ -411,8 +373,6 @@ document.getElementById("subtotal").innerText=
 `Subtotal (${count} tiket) - ${rupiah(total)}`;
 
 }
-
-/* PAGE */
 
 function nextPage(){
 
@@ -439,8 +399,6 @@ document.getElementById("orderSummary").innerText=
 Total: ${rupiah(total)}`;
 
 }
-
-/* INVOICE */
 
 function showInvoice(){
 
@@ -475,31 +433,34 @@ document.getElementById("page3").classList.add("active");
 
 }
 
-/* WHATSAPP */
-
 function confirmWA(){
 
-let pesan="Saya sudah melakukan pembayaran tiket Own The Way Race";
+let pesan="Saya sudah melakukan pembayaran tiket Neverland Project";
 
 window.open("https://wa.me/6281234567890?text="+encodeURIComponent(pesan));
 
 }
 
-/* COUNTDOWN */
+/* COUNTDOWN 5 JAM */
 
-let eventDate=new Date("May 2, 2026 00:00:00").getTime();
+let countdownTime = 5 * 60 * 60 * 1000;
+let endTime = new Date().getTime() + countdownTime;
 
 setInterval(function(){
 
-let now=new Date().getTime();
-let gap=eventDate-now;
+let now = new Date().getTime();
+let gap = endTime - now;
 
-let d=Math.floor(gap/(1000*60*60*24));
-let h=Math.floor((gap%(1000*60*60*24))/(1000*60*60));
-let m=Math.floor((gap%(1000*60*60))/(1000*60));
+let h = Math.floor((gap/(1000*60*60)));
+let m = Math.floor((gap%(1000*60*60))/(1000*60));
+let s = Math.floor((gap%(1000*60))/1000);
 
-document.getElementById("countdown").innerText=
-d+" hari "+h+" jam "+m+" menit";
+document.getElementById("countdown").innerText =
+h+" jam "+m+" menit "+s+" detik";
+
+if(gap < 0){
+document.getElementById("countdown").innerText = "Waktu tiket tambahan telah habis";
+}
 
 },1000);
 
